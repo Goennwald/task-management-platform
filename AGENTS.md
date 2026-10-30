@@ -2,7 +2,7 @@
 
 ## Goal
 
-Build a task management app similar to Jira, starting with a rough MVP: create tasks, assign them to a user, and organize them in a kanban board. Details are in [docs/mvp.md](docs/mvp.md).
+Build a task management app similar to Jira, starting with a rough MVP: create tasks, assign them to a user, and organize them in a kanban board. Details are in [docs/mvp.md](docs/mvp.md). The stack is in [docs/tech-stack.md](docs/tech-stack.md).
 
 ## Documentation
 

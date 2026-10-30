@@ -1,0 +1,39 @@
+# Tech stack
+
+Single full-stack TypeScript app in one package (no separate frontend and backend projects).
+
+- **Project layout:** scaffolded with the official template (`npx create-react-router@latest`) in the repo root, next to `docs/` and `AGENTS.md`, with no wrapper folder. The other tools are added on top of it one at a time.
+- **Framework:** React Router (framework mode), not Next.js
+- **Language:** TypeScript
+- **Validation:** Zod schemas parse the submitted `FormData` in React Router actions and infer the TypeScript types. Validation errors are returned to the form as field-level messages.
+- **Environment config:** a gitignored `.env` file holds `DATABASE_URL`. A committed `.env.example` has the same keys with safe local defaults, and the Docker Compose Postgres service uses the same defaults. A small Zod-validated module reads the variables and fails at startup if one is missing.
+- **AI tooling files:** the shared config is committed (`.mcp.json`, `skills-lock.json`, `.agents/`, and anything shared in `.claude/`) so everyone who clones the repo gets the same setup. Per-machine files such as `.claude/settings.local.json` are listed in `.gitignore`.
+- **npm scripts:**
+    - `dev`: start the dev server
+    - `build` and `start`: build and run the production build
+    - `typecheck`: run `tsc`
+    - `lint`: run oxlint
+    - `format`: run oxfmt
+    - `test`: run Vitest
+    - `test:e2e`: run Playwright
+    - `db:generate`, `db:migrate` and `db:seed`: the Drizzle migration commands and the seed script
+    - `db:up`: run `docker compose up -d`
+- **Styling:** Tailwind CSS, with no component library
+- **Unit tests:** Vitest
+- **E2E tests:** Playwright, set up from the start
+- **Linting:** oxlint (not ESLint)
+- **Formatting:** oxfmt (not Prettier)
+- **Type checking:** `tsc`
+- **CI:** none for now
+- **Docker Compose (Postgres):**
+    - Image `postgres:18`, pinned to the major version (not the `-alpine` variant)
+    - A named volume keeps the data across `docker compose down`. `docker compose down -v` wipes it for a clean reset.
+    - Port `5432` on the host
+    - Throwaway local credentials: user, password and database all named `taskmanagement`, matching the defaults in `.env.example`
+    - A `pg_isready` health check, so migrations and the seed script can wait for the database
+- **Package manager:** npm, not pnpm
+- **Node:** current LTS, pinned in `.nvmrc` and the `engines` field of `package.json`
+- **Database:** PostgreSQL, run locally with Docker Compose (not SQLite)
+- **ORM:** Drizzle, not Prisma
+- **Schema changes:** versioned migrations. Change the Drizzle schema, run `drizzle-kit generate`, commit the SQL migration file, and apply it with `drizzle-kit migrate`. Do not use `drizzle-kit push`.
+- **Seed data:** a seed script fills the local database with a few users and tasks.
