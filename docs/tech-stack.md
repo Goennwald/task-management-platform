@@ -35,5 +35,7 @@ Single full-stack TypeScript app in one package (no separate frontend and backen
 - **Node:** current LTS, pinned in `.nvmrc` and the `engines` field of `package.json`
 - **Database:** PostgreSQL, run locally with Docker Compose (not SQLite)
 - **ORM:** Drizzle, not Prisma
+- **Postgres driver:** `postgres` (postgres.js), not `pg`
+- **Drizzle layout:** the config is `drizzle.config.ts`, the schema is `app/db/schema.ts`, the client is `app/db/index.server.ts`, and generated migrations go to `drizzle/`. The schema is empty until the task fields are decided.
 - **Schema changes:** versioned migrations. Change the Drizzle schema, run `drizzle-kit generate`, commit the SQL migration file, and apply it with `drizzle-kit migrate`. Do not use `drizzle-kit push`.
 - **Seed data:** a seed script fills the local database with a few users and tasks.
