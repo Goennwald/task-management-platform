@@ -24,6 +24,7 @@ Single full-stack TypeScript app in one package (no separate frontend and backen
 - **Linting:** oxlint (not ESLint)
 - **Formatting:** oxfmt (not Prettier), with 4-space indentation. `.oxfmtrc.json` skips generated and vendored files (`drizzle/`, lock files, `.mcp.json`, `.agents/`, `.claude/`) and `package.json`, which npm rewrites.
 - **Type checking:** `tsc`
+- **Pre-commit hook:** Lefthook (config in `lefthook.yml`, installed by the `prepare` script on `npm install`). It formats the staged files with oxfmt and re-stages them, lints them with oxlint, and runs `tsc`. Unit and E2E tests are not part of the hook.
 - **CI:** none for now
 - **Docker Compose (Postgres):**
     - Image `postgres:18`, pinned to the major version (not the `-alpine` variant)
