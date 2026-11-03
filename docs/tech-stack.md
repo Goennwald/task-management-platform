@@ -19,10 +19,10 @@ Single full-stack TypeScript app in one package (no separate frontend and backen
     - `db:generate`, `db:migrate` and `db:seed`: the Drizzle migration commands and the seed script
     - `db:up`: run `docker compose up -d`
 - **Styling:** Tailwind CSS, with no component library
-- **Unit tests:** Vitest
-- **E2E tests:** Playwright, set up from the start
+- **Unit tests:** Vitest, for `app/**/*.test.{ts,tsx}`. The run passes while there are no tests yet.
+- **E2E tests:** Playwright, set up from the start. Tests live in `e2e/`. Run `npx playwright install chromium` once to download the browser. The dev server is started automatically.
 - **Linting:** oxlint (not ESLint)
-- **Formatting:** oxfmt (not Prettier)
+- **Formatting:** oxfmt (not Prettier), with 4-space indentation. `.oxfmtrc.json` skips generated and vendored files (`drizzle/`, lock files, `.mcp.json`, `.agents/`, `.claude/`) and `package.json`, which npm rewrites.
 - **Type checking:** `tsc`
 - **CI:** none for now
 - **Docker Compose (Postgres):**
@@ -38,4 +38,4 @@ Single full-stack TypeScript app in one package (no separate frontend and backen
 - **Postgres driver:** `postgres` (postgres.js), not `pg`
 - **Drizzle layout:** the config is `drizzle.config.ts`, the schema is `app/db/schema.ts`, the client is `app/db/index.server.ts`, and generated migrations go to `drizzle/`. The schema is empty until the task fields are decided.
 - **Schema changes:** versioned migrations. Change the Drizzle schema, run `drizzle-kit generate`, commit the SQL migration file, and apply it with `drizzle-kit migrate`. Do not use `drizzle-kit push`.
-- **Seed data:** a seed script fills the local database with a few users and tasks.
+- **Seed data:** a seed script fills the local database with a few users and tasks. The `db:seed` script is added together with the schema, because the schema is still empty.
