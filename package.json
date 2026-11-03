@@ -9,7 +9,8 @@
     "typecheck": "react-router typegen && tsc",
     "db:up": "docker compose up -d",
     "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate"
+    "db:migrate": "drizzle-kit migrate",
+    "lint": "oxlint"
   },
   "dependencies": {
     "@react-router/node": "^8.5.1",
@@ -29,6 +30,7 @@
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
     "drizzle-kit": "^0.31.11",
+    "oxlint": "^1.91.0",
     "tailwindcss": "^4.2.2",
     "typescript": "^5.9.3",
     "vite": "^8.0.3"
